@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Inicio - delocaleo.com{% endblock %}
+
+{% block content %}
+    {% include 'template/aside.html.twig' %}
+{% endblock %}
+
+{% block extrajs %}
+    <script type="text/javascript" src="{{ asset('js/colorBordeArticulos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/eliminaEspaciosVerticalesArticulos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/muestraOcultaNavPaginas.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/limitaPag.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{# Bloque para definir las etiquetas meta #}
+{% block extrameta%}
+    <meta name="description" content="delocaleo.com - Articulos interesantes de tematica variada.
+     Humor, Curiosidades Reflexion. Aportes. Comparte aquello que veas interensante con la comunidad." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+{% endblock %}
+
+{# Bloque hojas de estilos por defecto #}
+{% block stylesheets %}
+    <link href="http://allfont.es/allfont.css?fonts=league-spartan" rel="stylesheet" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/index.css') }}"/>
+{% endblock %}
+
+{# Bloque body por defecto #}
+{% block body %}
+    <div class="contenedor-para-sticky">
+        <header>
+            {% include 'template/header.html.twig' %}
+        </header>
+        {% block content %}{% endblock %}
+        <footer>
+            {% include 'template/footer.html.twig' %}
+        </footer>
+    </div>
+{% endblock %}
+
+{# Bloque para los scripts#}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/muestraOcultaNavegacion.js') }}"></script>
+    {% block extrajs %}{% endblock %}
+{% endblock %}

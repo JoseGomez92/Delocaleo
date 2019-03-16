@@ -1,0 +1,31 @@
+{# <?php
+	//Cogemos el id del post actual para redirigir a redirigePosts, mandandole el post
+	if(isset($_GET['id'])){
+
+		$id = $_GET['id'];
+		//Importamos la funcion para realizar consultas
+		$consultaUltimo = "SELECT * FROM publicados ORDER BY id ASC";
+		$datos = conectaYConsulta($consultaUltimo);
+		$registro = mysqli_fetch_array($datos);
+		$idPrimerPost = $registro['id']; //Otenemos el primer registro de la tabla(que sera el primer post publicado)
+		//Saltamos el puntero al ultimo registro(el post mas nuevo)
+		mysqli_data_seek($datos, (mysqli_num_rows($datos) - 1));
+		$registro = mysqli_fetch_array($datos);
+		$idUltimoPost = $registro['id']; //Obtenemos el id del ultimo post publicado
+
+
+		echo '<nav class="nav-posts">';
+    echo '	<div class="contenedor-nav-posts">';
+    if($id < $idUltimoPost){
+    echo '<a href="../paginasPrincipales/redirigePosts.php?id='.$id.'&pagina=anterior"><span class="anterior"><img src="../imagenes/iconos/flecha-anterior.png" alt="pagina-anterior"/></span></a><p class="ant">Ant.</p>';
+    }
+    if(($id < $idUltimoPost) && ($id > $idPrimerPost)){
+    echo '<span class="separador">|</span>';
+    }
+    if($id > $idPrimerPost){
+    echo '<a href="../paginasPrincipales/redirigePosts.php?id='.$id.'&pagina=siguiente"><p class="sig">Sig.</p><span class="siguiente"><img src="../imagenes/iconos/flecha-siguiente.png" alt="pagina-siguiente"></span></a>';
+    }
+    echo '</div>';
+    echo '</nav>';
+}
+?> #}

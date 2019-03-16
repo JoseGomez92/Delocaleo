@@ -1,0 +1,23 @@
+<header>
+    <div class="contenedor-header">
+        <div class="contenedor-boton">
+            <button id ="expandeMenu" class="expande-menu">Menú</button>
+        </div>
+        <div class="contenedor-logo">
+            <figure>
+                <img src="{{ asset('img/icons/logo.png') }}" alt="logo-delocaleo.png" />
+            </figure>
+        </div>
+    </div>
+    <nav id="navegacion" class="navegacion ocultar">
+        <ul class="menu-navegacion">
+            <li class="item-navegacion"><a href="{{ path('inicio') }}">Inicio</a></li>
+            <li class="item-navegacion"><a href="{{ path('actualidad') }}">Actualidad</a></li>
+            <li class="item-navegacion"><a href="{{ path('humor') }}">Humor</a></li>
+            <li class="item-navegacion"><a href="{{ path('curiosidad') }}">Curiosidades</a></li>
+            <li class="item-navegacion"><a href="{{ path('reflexion') }}">Reflexión</a></li>
+            <li class="item-navegacion"><a href="{{ path('contacto') }}">Contacto</a></li>
+            <li id="cerrar" class="item-cerrar"><img src="{{ asset('img/icons/cerrar.png') }}"></li>
+        </ul>
+    </nav>
+</header>

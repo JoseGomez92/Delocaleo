@@ -1,0 +1,36 @@
+<aside>
+    <div class="contenedor-aside">
+        <div class="rrss">
+            <h4>¡Síguenos!</h4>
+            <figure class="imagenes-rrss">
+                <a href="https://www.facebook.com/DeLocaleo-1869409416606542/?fref=ts"><img src="{{ asset('img/icons/facebook.jpg') }}" alt="facebook"></a>
+                <a href="https://twitter.com/delocaleo"><img src="{{ asset('img/icons/twitter.jpg') }}" alt="twitter"></a>
+                <a href="https://delocaleo.tumblr.com/"><img src="{{ asset('img/icons/tumblr.jpg') }}" alt="tumblr"></a>
+            </figure>
+        </div>
+        <div class="contenedor-buscar">
+            <form class="formulario-buscar" method="get" action="paginasPrincipales/resultadosBusqueda.php">
+                <input type="text" name="buscar" max="80" placeholder="¿Qué desea buscar?" required>
+                <label for="posts">posts</label>
+                <input type="checkbox" name="posts" value="posts">
+                <label for="tags">tags</label>
+                <input type="checkbox" name="tags" value="tags" checked>
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
+        <div class="recomendados">
+            <h3>Los más vistos</h3>
+            <div class="posts-mas-vistos">
+             {#   <?php
+					$consulta = "SELECT * FROM visitas ORDER BY contador DESC LIMIT 5";
+					$datos = conectaYConsulta($consulta);
+					while($registro = mysqli_fetch_array($datos)){
+						$tituloPost = $registro['tituloPost'];
+						$rutaArchivo = 'posts/'.$registro['nombreArchivo'].'.php';
+						echo "<a href="."$rutaArchivo"."><p>$tituloPost</p></a>";
+                }
+                ?>#}
+            </div>
+        </div>
+    </div>
+</aside>

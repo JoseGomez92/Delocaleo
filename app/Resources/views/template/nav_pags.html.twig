@@ -1,0 +1,27 @@
+<nav class="nav-paginas">
+    <div class="contenedor-nav-paginas">
+        {# <?php
+			$pagina = 1;
+			if(isset($_GET['pagina']) && $_GET['pagina'] !== '1'){
+				$pagina = $_GET['pagina'];
+				echo '<a href="index.php?pagina='.($pagina - 1).'"><span class="anterior"><img src="imagenes/iconos/flecha-anterior.png" alt="pagina-anterior"/></span></a>';
+        }
+        echo '<p id="numeroPagina" class="numero-pagina">'.$pagina.'</p>';
+        $consulta = "SELECT * FROM publicados";
+        $datos = conectaYConsulta($consulta);
+        $numeroRegistros = mysqli_num_rows($datos);
+        if(($pagina * $cantidadArticulos) < $numeroRegistros){
+        echo '<a href="index.php?pagina='.($pagina + 1).'"><span class="siguiente"><img src="imagenes/iconos/flecha-siguiente.png" alt="pagina-siguiente"></span></a>';
+        }
+        $paginaMaxima = ceil($numeroRegistros / $cantidadArticulos);
+        if($paginaMaxima < 1){ $paginaMaxima = 1; }
+        ?> #}
+    </div>
+    <div id="buscarPagina" class="buscar-pagina ocultar">
+        <form class="ir-a-pagina" method="get" action="index.php">
+            <label for="pagina">Página:</label>
+            <input type="text" name="pagina" id='pagina' placeholder="Max. {# <?php echo $paginaMaxima ?> #}" required>
+            <input type="submit" value="Ir">
+        </form>
+    </div>
+</nav>

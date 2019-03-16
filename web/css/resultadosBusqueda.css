@@ -1,0 +1,25 @@
+
+.letrero-info{
+	width: 100%;
+	margin-bottom: 30px;
+	text-align: left;
+}
+
+.letrero-info ~ .letrero-info{
+	margin-top: 70px;
+}
+
+.letrero-info h2{
+	font-size: 30px;
+}
+
+
+/* --------------- Media Queries ------------------ */
+
+@media screen and (max-width: 1080px){
+		
+	.letrero-info h2{
+		font-size: 36px;
+	}
+	
+}
