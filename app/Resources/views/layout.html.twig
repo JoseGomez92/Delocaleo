@@ -11,6 +11,7 @@
 {% block stylesheets %}
     <link href="http://allfont.es/allfont.css?fonts=league-spartan" rel="stylesheet" type="text/css" />
     <link type="text/css" rel="stylesheet" href="{{ asset('css/index.css') }}"/>
+    {% block extrasheets %}{% endblock %}
 {% endblock %}
 
 {# Bloque body por defecto #}

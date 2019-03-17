@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * PostRepository
  *
@@ -10,6 +12,8 @@ namespace AppBundle\Repository;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
+    //Constante ndica la cantidad de post que recuperaran por cada pagina
+    const limit = 6;
 
     //Metodo para obtener todos los post de una categoria
     public function findByCategory($category){
@@ -20,12 +24,63 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
-    //Metodo para obtener todos los posts
-/*    public function obtenerPostsPaginados(){
-        $queryBuilder = $this->createQueryBuilder('p')
-            ->where('c.id = :categoriaId')
-        ;
-        return $queryBuilder->getQuery()->getResult();
-    }*/
+
+    //Metodo para obtener post paginados (independientemente de su categoria)
+    public function findPaged($page = 1){
+        //Se forma la consulta
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT p FROM AppBundle:Post p ORDER BY p.id DESC');
+        //Se indica la paginacion para la consulta
+        $queryPaginated = $this->paginate($query, $page)->getQuery();
+        //Se devuelven los registros
+        return $queryPaginated->getResult();
+    }
+
+
+    //Metodo para obtener obtener una cantidad determinada de post(mediante paginacion)
+    public function findPagedByCategory($category, $page = 1){
+        //Se forma la consulta
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT p FROM AppBundle:Post p WHERE p.categoria = :categoria ORDER BY p.id DESC')
+            ->setParameter('categoria', $category);
+        //Se indica la paginacion para la consulta
+        $queryPaginated = $this->paginate($query, $page)->getQuery();
+        //Se devuelven los registros
+        return $queryPaginated->getResult();
+    }
+
+
+    //Metodo para obtener el numero de paginas total (correspondiente al numero de posts de todas las categorias)
+    public function getNumPages(){
+        $numPosts = $this->getEntityManager()
+            ->createQuery(
+                'SELECT count(p.id) FROM AppBundle:Post p')
+            ->getSingleScalarResult();
+        return ceil($numPosts / PostRepository::limit);
+    }
+
+
+    //Metodo para obtener el numero de pagins total para una categoria
+    public function getNumPagesByCategory($category){
+        $numPosts = $this->getEntityManager()
+            ->createQuery(
+                'SELECT count(p.id) FROM AppBundle:Post p WHERE p.categoria = :categoria')
+            ->setParameter('categoria', $category)
+            ->getSingleScalarResult();
+        return ceil($numPosts / PostRepository::limit);
+    }
+
+    //Metodo para paginar
+    public function paginate($dql, $page = 1)
+    {
+        //Se obtiene la instancia para paginar
+        $paginator = new Paginator($dql);
+        //Se añade la paginacion a la consulta
+        $paginator->getQuery()
+            ->setFirstResult(PostRepository::limit * ($page - 1)) // Offset
+            ->setMaxResults(PostRepository::limit); // Limit
+        return $paginator;
+    }
 
 }

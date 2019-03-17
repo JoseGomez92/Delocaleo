@@ -3,13 +3,56 @@
 
 {% block title %}{{ post.titulo }} - delocaleo.com{% endblock %}
 
+{% block extrasheets %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/post.css') }}" />
+{% endblock %}
+
 {% block content %}
+    <section id="section">
+        <div class="contenedor-seccion">
+            <article class="post" style="background-color:{{ post.categoria.color }}">
+                <p class='tematica'>{{ post.categoria.nombre|capitalize }}</p>
+                <h3>{{ post.titulo }}</h3>
+                <figure class="imagen-post">
+                    <img src='{# path_imagen #}' alt='{# nombre_imagen #}'>
+                </figure>
+                <div class="descripcion-post">
+                    {% for parraf in post.descripcion|trim|split('\n') %}
+                        <p>{{ parraf }}</p>
+                    {% endfor %}
+                    {{ post.descripcion }}
+                </div>
+                <div class="tags">
+                    {% for tag in post.tags|trim|split(' ') %}
+                        <span>#{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <date class='fecha'>{{ post.fechacreacion|date("d/m/Y") }}</date>
+                <div class="botones-para-compartir">
+                    <h4>Compártelo:</h4>
+                    <a id="whatsapp" href="javascript:void(0);" data-action="share/whatsapp/share" rel="nofollow" title="Compartir en Whatsapp">
+                        <img src="{{ asset('img/icons/whatsapp.png') }}" alt="compartir en whatsapp">
+                    </a>
+                    <a id ="facebook" href="javascript:void(0);" target="_blank" rel="nofollow" title="Compartir en Facebook">
+                        <img alt="Compartir en facebook" src="{{ asset('img/icons/facebook.png') }}" title="Compartir en facebook" />
+                    </a>
+                    <a id="twitter" href="javascript:void(0);" target="_blank" rel="nofollow" title="Compartir en Twitter">
+                        <img alt="compartir en twitter" src="{{ asset('img/icons/twitter.png') }}" title="Compartir en twitter" />
+                    </a>
+                    <a id="tumblr" href="javascript:void(0);" target="_blank" rel="nofollow" title="Compartir en Tumblr">
+                        <img alt="Compartir en tumblr" src="{{ asset('img/icons/tumblr.png') }}" title="Compartir en tumblr" />
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
     {% include 'template/aside.html.twig' %}
+    {% include 'nav_posts.html.twig' %}
 {% endblock %}
 
 {% block extrajs %}
-    <script type="text/javascript" src="js/colorBordeArticulos.js"></script>
-    <script type="text/javascript" src="js/eliminaEspaciosVerticalesArticulos.js"></script>
-    <script type="text/javascript" src="js/muestraOcultaNavPaginas.js"></script>
-    <script type="text/javascript" src="js/limitaPag.js"></script>
+    <script type="text/javascript" src="{{ asset('js/compartirPostRedes.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/eliminaEspaciosVerticalesArticulos.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/muestraOcultaNavPaginas.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/limitaPag.js') }}"></script>
 {% endblock %}

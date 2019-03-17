@@ -10,55 +10,29 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class CategoriaController extends Controller
 {
     /**
-     * @Route("/actualidad", name="actualidad")
+     * @Route("/categoria/{categoryName}", name="ver_categoria")
      */
-    public function actualidadAction(Request $request)
+    public function viewAction(Request $request, $categoryName)
     {
         //Se obtiene la categoria
-        $category = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findOneBy(array('nombre' => 'actualidad'));
-        //Se obtienen los post cuya categoria sea actualidad
-        $posts = $this->getDoctrine()->getManager()->getRepository('AppBundle:Post')->findByCategory($category);
+        $category = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findOneBy(array('nombre' => $categoryName));
 
-        // replace this example code with whatever you need
-        return $this->render('categoria/categoria.html.twig', [
-            'categoria' => $category,
-            'posts' => $posts,
-        ]);
-        return $this->render('base.html.twig');
+        if($category != null){
+            //Se obtienen los post de la categoria
+            $posts = $this->getDoctrine()->getManager()->getRepository('AppBundle:Post')->findPagedByCategory($category);
+            //Se obtienen todas las categorias de la BBDD
+            $categories = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findAll();
+            return $this->render('categoria/categoria.html.twig', [
+                'categoria' => $category,
+                'posts' => $posts,
+                'categorias' => $categories,
+             ]);
+        }
+        else{
+            return $this->render('base.html.twig');
+        }
     }
 
-    /**
-     * @Route("/humor", name="humor")
-     */
-    public function humorAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('categoria/categoria.html.twig', [
-            'base_dir' => 'humor',
-        ]);
-    }
-
-    /**
-     * @Route("/curiosidad", name="curiosidad")
-     */
-    public function curiosidadAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('categoria/categoria.html.twig', [
-            'base_dir' => 'curiosidad',
-        ]);
-    }
-
-    /**
-     * @Route("/reflexion", name="reflexion")
-     */
-    public function reflexionAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('categoria/categoria.html.twig', [
-            'base_dir' => 'reflexion',
-        ]);
-    }
 
     /**
      * @Route("/contacto", name="contacto")

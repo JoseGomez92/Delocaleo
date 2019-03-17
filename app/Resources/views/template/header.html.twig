@@ -12,10 +12,9 @@
     <nav id="navegacion" class="navegacion ocultar">
         <ul class="menu-navegacion">
             <li class="item-navegacion"><a href="{{ path('inicio') }}">Inicio</a></li>
-            <li class="item-navegacion"><a href="{{ path('actualidad') }}">Actualidad</a></li>
-            <li class="item-navegacion"><a href="{{ path('humor') }}">Humor</a></li>
-            <li class="item-navegacion"><a href="{{ path('curiosidad') }}">Curiosidades</a></li>
-            <li class="item-navegacion"><a href="{{ path('reflexion') }}">Reflexión</a></li>
+            {% for categoria in categorias %}
+                <li class="item-navegacion"><a href="{{ categoria.nombre }}">{{ categoria.nombre|capitalize }}</a></li>
+            {% endfor %}
             <li class="item-navegacion"><a href="{{ path('contacto') }}">Contacto</a></li>
             <li id="cerrar" class="item-cerrar"><img src="{{ asset('img/icons/cerrar.png') }}"></li>
         </ul>
