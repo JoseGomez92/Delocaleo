@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,10 +14,17 @@ class CategoriaController extends Controller
      */
     public function actualidadAction(Request $request)
     {
+        //Se obtiene la categoria
+        $category = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findOneBy(array('nombre' => 'actualidad'));
+        //Se obtienen los post cuya categoria sea actualidad
+        $posts = $this->getDoctrine()->getManager()->getRepository('AppBundle:Post')->findByCategory($category);
+
         // replace this example code with whatever you need
         return $this->render('categoria/categoria.html.twig', [
-            'base_dir' => 'actualidad',
+            'categoria' => $category,
+            'posts' => $posts,
         ]);
+        return $this->render('base.html.twig');
     }
 
     /**

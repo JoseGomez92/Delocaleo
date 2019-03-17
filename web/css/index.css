@@ -41,11 +41,12 @@
 		font-family: 'League Spartan Bold', 'arial';
 	}
 
-	.contenedor-para-sticky{
-		height: auto;
+	.contenedor-body{
 		min-height: 100%;
+	}
+
+	.contenedor-para-sticky{
 		padding-bottom: 80px; /* Altura del footer */
-		margin-bottom: 50px;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
@@ -129,6 +130,17 @@
 		padding-left: 20px;
 		padding-right: 20px;
 		color: #fff;
+	}
+
+	.menu-navegacion a{
+		border: 3px solid transparent;
+	}
+
+	.item-navegacion:hover a{
+		color: #000;
+		font-size: 20px;
+		border: 0;
+		transition: .2s;
 	}
 
 	.item-cerrar{

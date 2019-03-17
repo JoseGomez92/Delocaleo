@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller
@@ -13,9 +15,11 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAll();
+
         // replace this example code with whatever you need
         return $this->render('default/inicio.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'posts' => $posts,
         ]);
     }
 }

@@ -15,14 +15,12 @@
 
 {# Bloque body por defecto #}
 {% block body %}
-    <div class="contenedor-para-sticky">
-        <header>
+    <div class="contenedor-body">
+        <div class="contenedor-para-sticky">
             {% include 'template/header.html.twig' %}
-        </header>
-        {% block content %}{% endblock %}
-        <footer>
-            {% include 'template/footer.html.twig' %}
-        </footer>
+            {% block content %}{% endblock %}
+        </div>
+        {% include 'template/footer.html.twig' %}
     </div>
 {% endblock %}
 
