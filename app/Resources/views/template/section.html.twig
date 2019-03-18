@@ -1,34 +1,40 @@
 <section id="section">
     <div class="contenedor-seccion">
-        {% for post in posts%}
-            <article style="background-color: {{ post.categoria.color }}" class="articulo">
-                <a href="post/{{ post.slug }}">
-                    <h3>{{ post.titulo }}.</h3>
-                    <div class="seccion-articulo">
-                        <figure class="imagen-post">
-                            <img src="{# post.imagen #}" alt="{# post.imagen #}">
-                        </figure>
-                        <div class="tema-y-etiquetas">
-                            <p class="tematica">{{ post.categoria.nombre|capitalize }}</p>
-                            <div class="tags">
-                                {% for tag in post.tags|trim|split(' ') %}
-                                    <span>#{{ tag }}</span>
-                                {% endfor %}
+        {% if posts|length > 0 %}
+            {% for post in posts%}
+                <article style="background-color: {{ post.categoria.color }}" class="articulo">
+                    <a href="{{ path('view_post', {'slug' : post.slug}) }}">
+                        <h3>{{ post.titulo }}.</h3>
+                        <div class="seccion-articulo">
+                            <figure class="imagen-post">
+                                <img src="{# post.imagen #}" alt="{# post.imagen #}">
+                            </figure>
+                            <div class="tema-y-etiquetas">
+                                <p class="tematica">{{ post.categoria.nombre|capitalize }}</p>
+                                <div class="tags">
+                                    {% for tag in post.tags|trim|split(' ') %}
+                                        <span>#{{ tag }}</span>
+                                    {% endfor %}
+                                </div>
+                                <date class="fecha">{{ post.fechacreacion|date("d/m/Y") }}</date>
                             </div>
-                            <date class="fecha">{{ post.fechacreacion|date("d/m/Y") }}</date>
                         </div>
-                    </div>
-                    <p class="descripcion-articulo">
-                        {% set palabras = post.descripcion|trim|split(' ') %}
-                        {% for palabra in palabras %}
-                            {% if loop.index < 30 %}
-                                {{ palabra }}
-                            {% endif %}
-                        {% endfor %}
-                        ...<b>Leer mas</b>
-                    </p>
-                </a>
-            </article>
-        {% endfor %}
+                        <p class="descripcion-articulo">
+                            {% set palabras = post.descripcion|trim|split(' ') %}
+                            {% for palabra in palabras %}
+                                {% if loop.index < 30 %}
+                                    {{ palabra }}
+                                {% endif %}
+                            {% endfor %}
+                            ...<b>Leer mas</b>
+                        </p>
+                    </a>
+                </article>
+            {% endfor %}
+        {% else %}
+            <div class="letrero-info">
+                <h2>No se han encontrado resultados que se ajusten a los criterios de busqueda</h2>
+            </div>
+        {% endif %}
     </div>
 </section>

@@ -37,7 +37,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
-    //Metodo para obtener obtener una cantidad determinada de post(mediante paginacion)
+    //Metodo para obtener una cantidad determinada de post(mediante paginacion)
     public function findPagedByCategory($category, $page = 1){
         //Se forma la consulta
         $query = $this->getEntityManager()
@@ -48,6 +48,33 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
         $queryPaginated = $this->paginate($query, $page)->getQuery();
         //Se devuelven los registros
         return $queryPaginated->getResult();
+    }
+
+
+    //Metodo para obtener posts en base a los criterios de busqueda (titulo, tags o ambos)
+    public function findBySearch($text, $title, $tags){
+        $query = '';
+        //Se forma la consulta en base a los criterios especificados
+        if(!is_null($title) && is_null($tags)){ //Busqueda por titulo
+            $query = $this->getEntityManager()
+                ->createQuery(
+                    "SELECT p FROM AppBundle:Post p WHERE p.titulo LIKE :titulo")
+                ->setParameter('titulo', '%'.$text.'%');
+        }
+        else if(is_null($title) && !is_null($tags)){ //Busqueda por tags
+            $query = $this->getEntityManager()
+                ->createQuery(
+                    "SELECT p FROM AppBundle:Post p WHERE p.tags LIKE :tags")
+                ->setParameter('tags', '%'.$text.'%');
+        }
+        else{ //Busqueda por titulo y tags
+            $query = $this->getEntityManager()
+                ->createQuery(
+                    "SELECT p FROM AppBundle:Post p WHERE p.titulo LIKE :titulo OR p.tags LIKE :tags")
+                ->setParameter('titulo', '%'.$text.'%')
+                ->setParameter('tags', '%'.$text.'%');
+        }
+        return $query->getResult();
     }
 
 

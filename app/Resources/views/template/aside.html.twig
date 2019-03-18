@@ -9,12 +9,12 @@
             </figure>
         </div>
         <div class="contenedor-buscar">
-            <form class="formulario-buscar" method="get" action="paginasPrincipales/resultadosBusqueda.php">
-                <input type="text" name="buscar" max="80" placeholder="¿Qué desea buscar?" required>
-                <label for="posts">posts</label>
-                <input type="checkbox" name="posts" value="posts">
+            <form class="formulario-buscar" method="post" action="{{ path('view_result_search') }}">
+                <input type="text" name="buscar" max="80" placeholder="Buscar Posts" required>
+                <label for="titulo">titulo</label>
+                <input type="checkbox" name="titulo" value="titulo" checked>
                 <label for="tags">tags</label>
-                <input type="checkbox" name="tags" value="tags" checked>
+                <input type="checkbox" name="tags" value="tags">
                 <input type="submit" value="Buscar">
             </form>
         </div>
