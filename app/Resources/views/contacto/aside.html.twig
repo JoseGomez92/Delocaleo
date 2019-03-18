@@ -18,15 +18,5 @@
                 <input type="submit" value="Buscar">
             </form>
         </div>
-        <div class="recomendados">
-            <h3>Los más vistos</h3>
-            <div class="posts-mas-vistos">
-                {% for post in postMasVisitados %}
-                    <a href="{{ path('view_post', {'slug' : post.slug}) }}">
-                        <p>{{ post.titulo }}</p>
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
     </div>
 </aside>

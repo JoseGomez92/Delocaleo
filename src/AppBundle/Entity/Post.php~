@@ -64,6 +64,13 @@ class Post
      */
     private $categoria;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="visitas", type="integer")
+     */
+    private $visitas;
+
 
     /**
      * Get id
@@ -193,5 +200,29 @@ class Post
     public function getCategoria()
     {
         return $this->categoria;
+    }
+
+    /**
+     * Set tags
+     *
+     * @param string $tags
+     *
+     * @return Post
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return string
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Contacto;
+use AppBundle\Form\ContactoType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,12 +26,15 @@ class CategoriaController extends Controller
             $pag = ($request->get("pagina") != null) ? $request->get("pagina") : 1;
             //Se obtienen los post de la categoria
             $posts = $this->getDoctrine()->getManager()->getRepository('AppBundle:Post')->findPagedByCategory($category, $pag);
+            //Se obtienen los post mas visitados
+            $postMasVisitados = $this->getDoctrine()->getRepository('AppBundle:Post')->getMoreVisited();
             //Se obtiene el numero de paginas para la categoria
             $numPags = $this->getDoctrine()->getManager()->getRepository('AppBundle:Post')->getNumPagesByCategory($category);
             return $this->render('categoria/categoria.html.twig', [
                 'categoria' => $category,
                 'posts' => $posts,
                 'categorias' => $categories,
+                'postMasVisitados' => $postMasVisitados,
                 'pagina' => $pag,
                 'numPags' => $numPags,
              ]);
@@ -52,12 +57,15 @@ class CategoriaController extends Controller
             $categories = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findAll();
             //Se obtienen los post de la categoria
             $posts = $this->getDoctrine()->getManager()->getRepository('AppBundle:Post')->findPagedByCategory($category, $pag);
+            //Se obtienen los post mas visitados
+            $postMasVisitados = $this->getDoctrine()->getRepository('AppBundle:Post')->getMoreVisited();
             //Se obtiene el numero de paginas para la categoria
             $numPags = $this->getDoctrine()->getManager()->getRepository('AppBundle:Post')->getNumPagesByCategory($category);
             return $this->render('categoria/categoria.html.twig', [
                 'categoria' => $category,
                 'posts' => $posts,
                 'categorias' => $categories,
+                'postMasVisitados' => $postMasVisitados,
                 'pagina' => $pag,
                 'numPags' => $numPags,
             ]);
@@ -73,10 +81,30 @@ class CategoriaController extends Controller
      */
     public function contactoAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => 'contacto',
-        ]);
+        $contacto = new Contacto();
+        //Se obtiene la instancia del formulario
+        $form = $this->createForm(ContactoType::class, $contacto, array());
+        //Se obtienen las categorias
+        $categorias = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findAll();
+
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $em = $this->getDoctrine()->getManager();
+            //Se indica la fecha actual para el contacto
+            $contacto->setFechaRegistro(new \DateTime("now"));
+            $em->persist($contacto);
+            $em->flush();
+            //Se indica el mensaje flash
+            $this->addFlash(
+                'notificacion',
+                '¡Mensaje Enviado! Contactaremos contigo a la mayor brevedad posible'
+            );
+        }
+
+        return $this->render('contacto/contacto.html.twig', array(
+            'form' => $form->createView(),
+            'categorias' => $categorias
+        ));
     }
 
 }

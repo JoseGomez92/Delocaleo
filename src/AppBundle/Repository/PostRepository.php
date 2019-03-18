@@ -12,8 +12,9 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
-    //Constante ndica la cantidad de post que recuperaran por cada pagina
+    //Constante para indicar la cantidad de post que recuperaran por cada pagina
     const limit = 2;
+
 
     //Metodo para obtener todos los post de una categoria
     public function findByCategory($category){
@@ -78,6 +79,18 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
+    //Metodo para obtener los post mas visitados
+    public function getMoreVisited(){
+        return $this->getEntityManager()->getRepository('AppBundle:Post')
+            ->createQueryBuilder('p')
+            ->select('p')
+            ->orderBy('p.visitas', 'DESC')
+            ->setFirstResult(0)
+            ->setMaxResults(5)
+            ->getQuery()->getResult();
+    }
+
+
     //Metodo para obtener el slug del post anterior y siguiente (de la misma categoria)
     public function getSlugsPosts($post){
         //Se obtienen todos los posts de la misma categoria
@@ -117,6 +130,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->getSingleScalarResult();
         return ceil($numPosts / PostRepository::limit);
     }
+
 
     //Metodo para paginar
     public function paginate($dql, $page = 1)

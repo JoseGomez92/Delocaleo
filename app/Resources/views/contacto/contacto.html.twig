@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block title %}Contacto - delocaleo.com{% endblock %}
+
+{% block extrasheets %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/formularioContacto.css') }}" />
+{% endblock %}
+
+{% block content %}
+    <section id="section">
+        <div class="contenedor-seccion">
+            <form class="formulario-contacto" method="post" action="{{ path('contacto') }}">
+                {% for mensajeFlash in app.session.flashbag.get('notificacion') %}
+                    <div class="contenedor-notificacion">
+                        <p>{{ mensajeFlash }}</p>
+                    </div>
+                {% endfor %}
+                <div class="contenedor-formulario">
+                    <h2>Formulario Contacto</h2>
+                    <h3>Este formulario ha sido realizado con la intención de escuchar a todo aquel que desee pornerse en contacto con nosotros. Si es tu caso, estas en el sitio correcto.</h3>
+                    {{ form_row(form.nombre) }}
+                    {{ form_row(form.apellidos) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.comentario) }}
+                    <input type="submit" value="Enviar">
+                </div>
+            </form>
+        </div>
+    </section>
+    {% include 'contacto/aside.html.twig' %}
+{% endblock %}

@@ -21,11 +21,14 @@ class DefaultController extends Controller
         $pag = ($request->get("pagina") != null) ? $request->get("pagina") : 1;
         //Se obtienen los posts
         $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findPaged($pag);
+        //Se obtienen los post mas visitados
+        $postMasVisitados = $this->getDoctrine()->getRepository('AppBundle:Post')->getMoreVisited();
         //Se obtiene el numero de paginas
         $numPags = $this->getDoctrine()->getRepository('AppBundle:Post')->getNumPages();
         return $this->render('default/inicio.html.twig', [
             'posts' => $posts,
             'categorias' => $categories,
+            'postMasVisitados' => $postMasVisitados,
             'pagina' => $pag,
             'numPags' => $numPags,
         ]);
@@ -40,11 +43,14 @@ class DefaultController extends Controller
         $categories = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findAll();
         //Se obtienen los posts
         $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findPaged($pag);
+        //Se obtienen los post mas visitados
+        $postMasVisitados = $this->getDoctrine()->getRepository('AppBundle:Post')->getMoreVisited();
         //Se obtiene el numero de paginas
         $numPags = $this->getDoctrine()->getRepository('AppBundle:Post')->getNumPages();
         return $this->render('default/inicio.html.twig', [
             'posts' => $posts,
             'categorias' => $categories,
+            'postMasVisitados' => $postMasVisitados,
             'pagina' => $pag,
             'numPags' => $numPags,
         ]);
