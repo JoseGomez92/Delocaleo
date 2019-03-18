@@ -32,21 +32,20 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/{page}", name="inicioPagina")
+     * @Route("/{pag}", name="inicio_paginado", requirements={"pag"="\d+"})
      */
-    public function pageAction(Request $request, $page)
+    public function indexPagAction(Request $request, $pag)
     {
         //Se obtienen las categorias
         $categories = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findAll();
         //Se obtienen los posts
-        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findPaged($page);
+        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findPaged($pag);
         //Se obtiene el numero de paginas
         $numPags = $this->getDoctrine()->getRepository('AppBundle:Post')->getNumPages();
-        // replace this example code with whatever you need
         return $this->render('default/inicio.html.twig', [
             'posts' => $posts,
             'categorias' => $categories,
-            'pagina' => $page,
+            'pagina' => $pag,
             'numPags' => $numPags,
         ]);
     }

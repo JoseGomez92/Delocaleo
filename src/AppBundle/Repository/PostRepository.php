@@ -13,7 +13,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
     //Constante ndica la cantidad de post que recuperaran por cada pagina
-    const limit = 6;
+    const limit = 2;
 
     //Metodo para obtener todos los post de una categoria
     public function findByCategory($category){
@@ -48,6 +48,26 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
         $queryPaginated = $this->paginate($query, $page)->getQuery();
         //Se devuelven los registros
         return $queryPaginated->getResult();
+    }
+
+
+    //Metodo para obtener el slug del post anterior y siguiente (de la misma categoria)
+    public function getSlugsPosts($post){
+        //Se obtienen todos los posts de la misma categoria
+        $posts = $this->getEntityManager()
+            ->createQuery(
+                'SELECT p FROM AppBundle:Post p WHERE p.categoria = :categoria AND p.id > 1 ORDER BY p.id ASC')
+            ->setParameter('categoria', $post->getCategoria())
+            ->getResult();
+        //Se obtiene el indice del posts en los resultados
+        $slugs = array('slugAnterior' => null, 'slugPosterior' => null);
+        for($i = 0; $i < count($posts); $i++){
+            if($posts[$i] == $post){
+                if($i > 0) $slugs['slugAnterior'] = $posts[$i - 1]->getSlug();
+                if($i < count($posts) - 1) $slugs['slugPosterior'] = $posts[$i + 1]->getSlug();
+            }
+        }
+        return $slugs;
     }
 
 

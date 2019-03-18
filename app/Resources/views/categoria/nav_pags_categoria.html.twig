@@ -1,0 +1,26 @@
+<nav class="nav-paginas">
+    <div class="contenedor-nav-paginas">
+        {% if pagina > 1 %}
+            <a href="{{ path('view_categoria_paged_url', {'categoryName' : categoria.nombre, 'pag' : pagina - 1}) }}">
+                <span class="anterior">
+                    <img src="{{ asset('img/icons/flecha-anterior.png') }}" alt="pagina-siguiente">
+                </span>
+            </a>
+        {% endif %}
+        <p id="numeroPagina" class="numero-pagina">{{ pagina }}</p>
+        {% if pagina < numPags %}
+            <a href="{{ path('view_categoria_paged_url', {'categoryName' : categoria.nombre, 'pag' : pagina + 1}) }}">
+                <span class="siguiente">
+                    <img src="{{ asset('img/icons/flecha-siguiente.png') }}" alt="pagina-siguiente">
+                </span>
+            </a>
+        {% endif %}
+    </div>
+    <div id="buscarPagina" class="buscar-pagina ocultar">
+        <form class="ir-a-pagina" method="post" action="{{ path('view_categoria_paged_post', {'categoryName' : categoria.nombre}) }}">
+            <label for="pagina">Página:</label>
+            <input type="text" name="pagina" id="pagina" placeholder="Max. {{ numPags }}" required>
+            <input type="submit" value="Ir">
+        </form>
+    </div>
+</nav>

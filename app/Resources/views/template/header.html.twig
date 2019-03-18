@@ -13,7 +13,7 @@
         <ul class="menu-navegacion">
             <li class="item-navegacion"><a href="{{ path('inicio') }}">Inicio</a></li>
             {% for categoria in categorias %}
-                <li class="item-navegacion"><a href="{{ categoria.nombre }}">{{ categoria.nombre|capitalize }}</a></li>
+                <li class="item-navegacion"><a href="{{ path('view_categoria_paged_post', {'categoryName' : categoria.nombre}) }}">{{ categoria.nombre|capitalize }}</a></li>
             {% endfor %}
             <li class="item-navegacion"><a href="{{ path('contacto') }}">Contacto</a></li>
             <li id="cerrar" class="item-cerrar"><img src="{{ asset('img/icons/cerrar.png') }}"></li>

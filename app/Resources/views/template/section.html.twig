@@ -2,7 +2,7 @@
     <div class="contenedor-seccion">
         {% for post in posts%}
             <article style="background-color: {{ post.categoria.color }}" class="articulo">
-                <a href="post/{{ post.slug }}?categoria={{ post.categoria.id }}&id={{ post.id }}">
+                <a href="post/{{ post.slug }}">
                     <h3>{{ post.titulo }}.</h3>
                     <div class="seccion-articulo">
                         <figure class="imagen-post">

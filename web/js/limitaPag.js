@@ -8,13 +8,13 @@ function limitaPagina(){
 	max = +(pagina.placeholder.substring(4));
 	pagina.addEventListener('change', function(){
 		//Se verifica que se haya indicado un entero
-		if(parseInt(pagina.value) != NaN){
+		if(isNaN(parseInt(pagina.value))){
 			pagina.value = 1;
 		}
-		else if(numPag > max){
+		else if(pagina.value > max){
 			pagina.value = max;
 		}
-		else if(numPag < 1){
+		else if(pagina.value < 1){
 			pagina.value = 1;
 		}
 	});
