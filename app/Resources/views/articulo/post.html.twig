@@ -14,13 +14,12 @@
                 <p class='tematica'>{{ post.categoria.nombre|capitalize }}</p>
                 <h3>{{ post.titulo }}</h3>
                 <figure class="imagen-post">
-                    <img src='{# path_imagen #}' alt='{# nombre_imagen #}'>
+                    <img src='{{ asset('uploads/') ~ post.imagen }}' alt='{{ post.imagen }}'>
                 </figure>
                 <div class="descripcion-post">
                     {% for parraf in post.descripcion|trim|split('\n') %}
                         <p>{{ parraf }}</p>
                     {% endfor %}
-                    {{ post.descripcion }}
                 </div>
                 <div class="tags">
                     {% for tag in post.tags|trim|split(' ') %}

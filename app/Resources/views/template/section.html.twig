@@ -7,7 +7,7 @@
                         <h3>{{ post.titulo }}.</h3>
                         <div class="seccion-articulo">
                             <figure class="imagen-post">
-                                <img src="{# post.imagen #}" alt="{# post.imagen #}">
+                                <img src="{{ asset('uploads/') ~ post.imagen }}" alt="{{ post.imagen }}">
                             </figure>
                             <div class="tema-y-etiquetas">
                                 <p class="tematica">{{ post.categoria.nombre|capitalize }}</p>

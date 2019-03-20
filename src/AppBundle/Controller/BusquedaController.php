@@ -21,9 +21,12 @@ class BusquedaController extends Controller
         $tags = $request->get("tags");
         //Se obtienen los post en base a los criterios de busqueda
         $posts = $this->getDoctrine()->getManager()->getRepository('AppBundle:Post')->findBySearch($text, $title, $tags);
+        //Se obtienen los post mas visitados
+        $postMasVisitados = $this->getDoctrine()->getRepository('AppBundle:Post')->getMoreVisited();
         return $this->render('busqueda/resultados.html.twig', [
             'posts' => $posts,
             'categorias' => $categories,
+            'postMasVisitados' => $postMasVisitados,
         ]);
     }
 }

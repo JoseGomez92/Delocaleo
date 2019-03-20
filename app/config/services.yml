@@ -33,3 +33,16 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+
+
+########################################################################################################################
+    #Controlador personalizado para la creacion de Posts
+    app.admin.post:
+        class: AppBundle\Admin\PostAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Post }
+        arguments:
+            - ~
+            - AppBundle\Entity\Post
+            - AppBundle\Controller\PostAdminController

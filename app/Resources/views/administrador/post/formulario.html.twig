@@ -1,0 +1,61 @@
+{% extends 'layout.html.twig' %}
+
+{% block extrameta %}
+    <meta name="description" content="Pagina para añadir posts">
+{% endblock %}
+
+{% block title %}Añadir Post{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/administrador.css') }}" />
+{% endblock %}
+
+{% block body %}
+    {% for mensajeFlash in app.session.flashbag.get('notificacion') %}
+        <div class="contenedor-notificacion">
+            <p>{{ mensajeFlash }}</p>
+        </div>
+    {% endfor %}
+    <section id="section">
+        <div class="contenedor-seccion">
+            {% if modificar is defined %}
+                <h2>Modificar Posts</h2>
+            {% else %}
+                <h2>Añadir Posts</h2>
+            {% endif %}
+            <form class="formulario-anadir" method="post" enctype="multipart/form-data" action="{{ path('add_post') }}">
+                <div class="contenedor-formulario">
+                    <h2>Formulario para añadir posts</h2>
+                    {{ form_row(form.categoria) }}
+                    {{ form_row(form.titulo) }}
+                    {{ form_row(form.slug) }}
+                    {{ form_row(form.imagen) }}
+                    {{ form_row(form.tags) }}
+                    {{ form_row(form.descripcion) }}
+                    <div>
+                        <span class="boton" id="cursiva">Cursiva</span>
+                        <span class="boton" id="negrita">Negrita</span>
+                        <span class="boton" id="imagen">Imagen</span>
+                        <span class="boton" id="tuit">Tuit</span>
+                        <span class="boton" id="video">Video</span>
+                        <span class="boton" id="enlace">Enlace</span>
+                        <span id="deshacer">Deshacer</span>
+                    </div>
+                    {% if modificar is defined %}
+                        <input type="submit" value="Modificar">
+                    {% elseif eliminar is defined %}
+                        <input type="submit" value="Eliminar">
+                    {% else %}
+                        <input type="submit" value="Añadir">
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/botonesTexto.js') }}"></script>
+{% endblock %}
+
+

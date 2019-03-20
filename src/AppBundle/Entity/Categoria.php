@@ -140,4 +140,9 @@ class Categoria
     {
         return $this->color;
     }
+
+
+    public function __toString() {
+        return $this->getNombre();
+    }
 }

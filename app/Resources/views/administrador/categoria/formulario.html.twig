@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block extrameta %}
+    <meta name="description" content="Pagina para añadir categorias">
+{% endblock %}
+
+{% block title %}Añadir Categoria{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/administrador.css') }}" />
+{% endblock %}
+
+{% block body %}
+    {% for mensajeFlash in app.session.flashbag.get('notificacion') %}
+        <div class="contenedor-notificacion">
+            <p>{{ mensajeFlash }}</p>
+        </div>
+    {% endfor %}
+    <section id="section">
+        <div class="contenedor-seccion">
+            {% if modificar is defined %}
+                <h2>Modificar Categorias</h2>
+                <form class="formulario-anadir" method="post" action="{{ path('view_modify_category', {'category_id' : categoria.id}) }}">
+            {% else %}
+                <h2>Añadir Categorias</h2>
+                <form class="formulario-anadir" method="post" action="{{ path('add_category') }}">
+            {% endif %}
+                <div class="contenedor-formulario">
+                    {{ form_row(form.nombre) }}
+                    {{ form_row(form.color) }}
+                    {% if modificar is defined %}
+                        <input type="submit" value="Modificar">
+                    {% elseif eliminar is defined %}
+                        <input type="submit" value="Eliminar">
+                    {% else %}
+                        <input type="submit" value="Añadir">
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/botonesTexto.js') }}"></script>
+{% endblock %}
+
+

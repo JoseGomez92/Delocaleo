@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{% block extrameta %}
+    <meta name="description" content="Pagina para ver las categorias del sitio">
+{% endblock %}
+
+{% block title %}Ver Categorias{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/administrador.css') }}" />
+{% endblock %}
+
+{% block body %}
+    {% for mensajeFlash in app.session.flashbag.get('notificacion') %}
+        <div class="contenedor-notificacion">
+            <p>{{ mensajeFlash }}</p>
+        </div>
+    {% endfor %}
+    <section>
+        <h2>Categorias publicadas</h2>
+        <div class="seccion-contenedor">
+            <table class="listado-categorias">
+                <tr>
+                    <th>Nombre Categoria</th>
+                    <th>Color Categoria</th>
+                </tr>
+                {% for categoria in categorias %}
+                    <tr>
+                        <td>{{ categoria.nombre }}</td>
+                        <td><span class="span-color" style="color: {{ categoria.color }}">{{ categoria.color }}</span></td>
+                        {% if modificar is defined %}
+                            <td>
+                                <a class="enlace-para-modificar-publicados" href="{{ path('view_modify_category', {'category_id' : categoria.id}) }}">Modificar</a>
+                            </td>
+                        {% elseif eliminar is defined %}
+                            <td>
+                                <a class="enlace-para-modificar-publicados" href="{{ path('delete_category', {'category_id' : categoria.id}) }}">Eliminar</a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+{% endblock %}
+
+

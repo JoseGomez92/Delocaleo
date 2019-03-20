@@ -201,6 +201,7 @@
 
 	.imagen-post img{
 		width: 100%;
+		border-radius: 10px;
 	}
 
 	.tema-y-etiquetas{

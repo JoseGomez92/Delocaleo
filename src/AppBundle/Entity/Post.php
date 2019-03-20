@@ -3,6 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\Image;
 
 /**
  * Post
@@ -50,6 +54,15 @@ class Post
      * @ORM\Column(name="descripcion", type="text")
      */
     private $descripcion;
+
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Image()
+     *
+     * @ORM\Column(name="imagen", type="string")
+     */
+    private $imagen;
 
     /**
      * @var \DateTime
@@ -248,5 +261,29 @@ class Post
     public function getVisitas()
     {
         return $this->visitas;
+    }
+
+    /**
+     * Set imagen
+     *
+     * @param string $imagen
+     *
+     * @return Post
+     */
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    /**
+     * Get imagen
+     *
+     * @return string
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
     }
 }

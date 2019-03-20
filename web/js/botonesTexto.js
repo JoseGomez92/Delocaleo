@@ -4,7 +4,7 @@
 function iniciar(){
 
 	//Variables disponibles globalmente
-	var texto = document.getElementById('descripcion');
+	var texto = document.getElementById('appbundle_post_descripcion');
 	var arrayTexto = new Array();
 	contador = 0;
 	

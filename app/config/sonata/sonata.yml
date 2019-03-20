@@ -1,0 +1,2 @@
+imports:
+  - { resource: sonata_admin.yml } #Se importa en este fichero el fichero de configuracion definido para sonata (sonata_admin.yml)
