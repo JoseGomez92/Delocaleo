@@ -24,8 +24,6 @@ class PostType extends AbstractType
             ->add('imagen', FileType::class, array(
                 "label" => "Imagen:",
                 "attr" =>array("class" => "form-control"),
-                "data_class" => null,
-                'property_path' => 'imagen'
             ))
             ->add('fecha_creacion')
             ->add('visitas')

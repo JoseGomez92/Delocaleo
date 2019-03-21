@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PostAdminController extends CRUDController
 {
 
-    public function asdfAction(Request $request){
+    public function newAction(Request $request){
         $post = new Post();
         $form = $this->createForm(ProductType::class, $post);
 

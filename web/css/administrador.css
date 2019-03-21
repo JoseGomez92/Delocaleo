@@ -1,4 +1,8 @@
-/* Pseudo Reset */
+/********************************************* RESET ESTILOS NAVEGADOR *********************************************/
+
+		body{
+			margin: 0;
+		}
 
 		a{
 			text-decoration: none;
@@ -13,9 +17,13 @@
 			outline: none;
 		}
 
+		ul{
+			list-style: none;
+		}
 
 
-/* Estilos genericos */
+
+/********************************************* ESTILOS ETIQUETAS *********************************************/
 
 	html{
 		width: 100%;
@@ -24,7 +32,8 @@
 
 	body{
 		width: 100%;
-		height: 100%;
+		min-height: 100%;
+		padding-top: 50px;
 		font-family: 'League Spartan Bold', 'arial';
 	}
 
@@ -32,16 +41,10 @@
 		text-align: center;
 	}
 
-	.contenedor-menu-administracion{
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
 	h2{
 		width: 100%;
 		text-align: center;
-		margin-top: 50px;
+		margin: 30px auto;
 	}
 
 	img{
@@ -81,110 +84,227 @@
 	textarea{
 		display: block;
 		width: 70%;
+		height: 300px;
 		margin: auto;
 		margin-bottom: 30px;
 		font-size: 18px;
 	}
 
-	a{
-		display: inline-block;
-		width: 200px;
-		height: 150px;
-		padding: 50px 20px 0 20px;
-		box-sizing: border-box;
-		text-align: center;
-		margin: 0 30px 30px 0;
-		color: #fff;
+	span{
+	/*	display: inline-block;
+		width: 100%;
+		margin-bottom: 20px;
+		padding: 5px 15px 5px 15px;
+		background-color: #13f0aa;*/
+	}
+
+/********************************************* ESTILOS ESPECIFICOS *********************************************/
+
+
+/*********************** MENU ***********************/
+.icono-sitio{
+	width: 150px;
+}
+
+.contenedor-menu-administracion{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.lista-menu{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.item-menu{
+	width: 150px;
+	height: 150px;
+	display: flex;
+	padding: 20px;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	text-align: center;
+	margin: 0 30px 30px 0;
+	color: #fff;
+	background-color: black;
+	border-radius: 50%;
+	border: 5px solid transparent;
+	transition: .2s;
+}
+
+.item-menu:hover{
+	border: 5px solid black;
+}
+
+.item-menu a{
+	font-size: 20px;
+	color:white;
+}
+
+.post-item-menu{
+	background-color: #00e765;
+}
+
+.categoria-item-menu{
+	background-color: #00c0ef;
+}
+
+.mensaje-item-menu{
+	background-color: lightsalmon;
+}
+
+.salir{
+	background-color: #2b2b2b;
+}
+
+
+
+/*********************** LISTADO ***********************/
+
+
+/***** POSTS *******/
+
+.contenedor-articulos{
+	display: flex;
+	align-items: start;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+.articulo{
+	width: 45%;
+	padding: 20px;
+	margin-bottom: 30px;
+	vertical-align: top;
+	border: 3px solid #000;
+	border-radius: 20px;
+}
+
+.articulo h3{
+	margin-bottom: 15px;
+	font-size: 22px;
+}
+
+.imagen-post{
+	display: block;
+	width: 80%;
+	margin: auto;
+}
+
+.imagen-post img{
+	width: 100%;
+}
+
+.tema-y-etiquetas{
+	margin-top: 10px;
+	width: 100%;
+	text-align: center;
+}
+
+.tematica{
+	display: block;
+	font-size: 20px;
+}
+
+.tags{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.tags span{
+	font-size: 16px;
+	color: #6d6767;
+}
+
+.fecha{
+	margin: 10px;
+	color: white;
+}
+
+.descripcion-articulo{
+	margin: 30px auto;
+	font-size: 18px;
+	line-height: 24px;
+}
+
+.articulo a{
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	padding: 0;
+}
+
+
+/***** CATEGORIAS *******/
+	.listado-categorias{
+		width: 90%;
+		border-collapse: separate;
+		border-spacing: 20px 30px;
+		margin: auto;
+		border: 5px solid black;
+	}
+
+	.listado-categorias tr a{
+		display: block;
+		width: 50%;
+		padding: 15px 30px;
+		color: white;
 		background-color: black;
 		border-radius: 10px;
 	}
 
-span{
-	display: inline-block;
-	width: 100;
-	margin-bottom: 20px;
-	padding: 5px 15px 5px 15px;
-	background-color: #13f0aa;
+	.span-muestra-color{
+		display: inline-block;
+		width: 50px;
+		height: 30px;
+	}
+
+	.enlace-modificacion-borrado{
+		margin: auto;
+		display: block;
+		padding: 30px;
+		color: white;
+		background-color: black;
+		border-radius: 10px;
+	}
+
+
+
+/***** MENSAJES(CONTACTOS) *******/
+.listado-mensajes{
+	width: 90%;
+	border-collapse: separate;
+	border-spacing: 20px 30px;
+	margin: auto;
+	border: 5px solid black;
 }
 
-/* Estilos especificos */
+.listado-mensajes tr a{
+	display: block;
+	width: 50%;
+	padding: 15px 30px;
+	color: white;
+	background-color: black;
+	border-radius: 10px;
+}
 
-	.articulo{
-		width: 80%;
-		padding: 20px;
-		margin: auto;
-		margin-bottom: 30px;
-		vertical-align: top;
-		border: 3px solid #000;
-		border-radius: 5px;
-	}
 
-	.articulo h3{
-		margin-bottom: 15px;
-		font-size: 22px;
-	}
 
-	.imagen-post{
-		display: block;
-		width: 100%;
-		margin: 0;
-	}
 
-	.imagen-post img{
-		width: 100%;
-	}
 
-	.tema-y-etiquetas{
-		margin-top: 10px;
-		width: 100%;
-		text-align: center;
-	}
+/*********************** FORMULARIOS ***********************/
 
-	.tematica{
-		display: block;
-		font-size: 20px;
-	}
+.boton-funcionalidad{
+	display: inline-block;
+	padding: 15px 30px;
+	color: white;
+	background-color: black;
+	border-radius: 10px;
+}
 
-	.tags{
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-
-	.tags span{
-		display: block;
-		font-size: 16px;
-		color: #6d6767;
-	}
-
-	.fecha{
-		margin-top: 10px;
-		font-size: 20px;
-	}
-
-	.descripcion-articulo{
-		font-size: 18px;
-		line-height: 24px;
-	}
-
-	.articulo a{
-		width: 100px;
-		height: 50px;
-		line-height: 50px;
-		padding: 0;
-	}
-
-	.final{
-		width: 100px;
-		height: 30px;
-		line-height: 30px;
-		padding: 0;
-		margin: 0;
-		border-radius: 5px;
-		position: fixed;
-		top: 10px;
-		right: 10px;
-		background-color: darkgrey;
-	}
 
 
 

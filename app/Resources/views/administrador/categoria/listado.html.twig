@@ -27,7 +27,10 @@
                 {% for categoria in categorias %}
                     <tr>
                         <td>{{ categoria.nombre }}</td>
-                        <td><span class="span-color" style="color: {{ categoria.color }}">{{ categoria.color }}</span></td>
+                        <td>
+                            <span class="span-color" style="color: {{ categoria.color }}">{{ categoria.color }}</span>
+                            <span class="span-muestra-color" style="background-color: {{ categoria.color }}"></span>
+                        </td>
                         {% if modificar is defined %}
                             <td>
                                 <a class="enlace-para-modificar-publicados" href="{{ path('view_modify_category', {'category_id' : categoria.id}) }}">Modificar</a>

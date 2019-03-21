@@ -19,35 +19,41 @@
     <section>
         <h2>Posts Publicados</h2>
         <div class="seccion-contenedor">
-            {% for post in posts %}
-                <article class="articulo">
-                    <h3>{{ post.titulo }}</h3>
-                    <div class="seccion-articulo">
-                        <figure class="imagen-post">
-                            <img src="{{ asset('uploads')~'/'~post.imagen }}" alt="{{ post.imagen }}">
-                        </figure>
-                        <div class="tema-y-etiquetas">
-                            <p class="tematica">Curiosidades</p>
-                            <div class="tags">
-                                {% for tag in post.tags|trim|split(' ') %}
-                                    <span>#{{ tag }}</span>
-                                {% endfor %}
+            <div class="contenedor-articulos">
+                {% for post in posts %}
+                    <article class="articulo" style="background-color: {{ post.categoria.color }}">
+                        <h3>{{ post.titulo }}</h3>
+                        <div class="seccion-articulo">
+                            <figure class="imagen-post">
+                                <img src="{{ asset('uploads')~'/'~post.imagen }}" alt="{{ post.imagen }}">
+                            </figure>
+                            <div class="tema-y-etiquetas">
+                                <p class="tematica">Curiosidades</p>
+                                <div class="tags">
+                                    {% for tag in post.tags|trim|split(' ') %}
+                                        <span>#{{ tag }}</span>
+                                    {% endfor %}
+                                </div>
+                                <span>Fecha Publicación:</span><date class="fecha">{{ post.fechacreacion|date("d/m/Y") }}</date>
                             </div>
-                            <date class="fecha">{{ post.fechacreacion|date("d/m/Y") }}</date>
                         </div>
-                    </div>
-                    <div class="descripcion-articulo">
-                        {% for parraf in post.descripcion|trim|split('\n') %}
-                            <p>{{ parraf }}</p>
-                        {% endfor %}
-                    </div>
-                    {% if modificar is defined %}
-                        <a class="enlace-para-modificar-publicados" href="{{ path('view_modify_post', {'post_id' : post.id}) }}">Modificar</a>
-                    {% elseif eliminar is defined %}
-                        <a class="enlace-para-modificar-publicados" href="{{ path('delete_post', {'post_id' : post.id}) }}">Eliminar</a>
-                    {% endif %}
-                </article>
-            {% endfor %}
+                        <div class="descripcion-articulo">
+                            {% for linea in post.descripcion|trim|split('\n') %}
+                                {% if 'class' in linea or 'src' in linea %}
+                                    {{ linea|raw }}
+                                {% else %}
+                                    <p>{{ linea }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% if modificar is defined %}
+                            <a class="enlace-modificacion-borrado" href="{{ path('view_modify_post', {'post_id' : post.id}) }}">Modificar</a>
+                        {% elseif eliminar is defined %}
+                            <a class="enlace-modificacion-borrado" href="{{ path('delete_post', {'post_id' : post.id}) }}">Eliminar</a>
+                        {% endif %}
+                    </article>
+                {% endfor %}
+            </div>
         </div>
     </section>
 {% endblock %}

@@ -17,8 +17,12 @@
                     <img src='{{ asset('uploads/') ~ post.imagen }}' alt='{{ post.imagen }}'>
                 </figure>
                 <div class="descripcion-post">
-                    {% for parraf in post.descripcion|trim|split('\n') %}
-                        <p>{{ parraf }}</p>
+                    {% for linea in post.descripcion|trim|split('\n') %}
+                        {% if 'class' in linea or 'src' in linea %}
+                            {{ linea|raw }}
+                        {% else %}
+                            <p>{{ linea }}</p>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <div class="tags">

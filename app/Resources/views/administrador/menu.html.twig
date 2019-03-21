@@ -13,19 +13,26 @@
 
 {% block body %}
     <section>
-        <h2>Menú de administracion DeLocaleo.com</h2>
+        <div class="contenedor-icono-sitio">
+            <figure>
+                <img class="icono-sitio" src="{{ asset('img/icons/logo.png') }}" />
+            </figure>
+        </div>
+        <h2>Menú de administracion</h2>
         <div class="contenedor-menu-administracion">
-            <a href="{{ path('list_post') }}">Listar Posts</a>
-            <a href="{{ path('add_post') }}">Añadir Post</a>
-            <a href="{{ path('list_modify_post') }}">Modificar Post</a>
-            <a href="{{ path('list_delete_post') }}">Eliminar Post</a>
-            <a href="{{ path('list_categories') }}">Listar Categoria</a>
-            <a href="{{ path('add_category') }}">Añadir Categoria</a>
-            <a href="{{ path('list_modify_category') }}">Modificar Categoria</a>
-            <a href="{{ path('list_delete_category') }}">Eliminar Categoria</a>
-            <a href="{{ path('list_messages') }}">Listar Mensajes recibidos</a>
-            <a href="{{ path('list_delete_messages') }}">Eliminar Mensajes recibidos</a>
-            <a class="final" href="/">Salir</a>
+            <ul class="lista-menu">
+                <li class="item-menu post-item-menu "><a href="{{ path('list_post') }}">Listar Posts</a></li>
+                <li class="item-menu post-item-menu"><a href="{{ path('add_post') }}">Añadir Post</a></li>
+                <li class="item-menu post-item-menu"><a href="{{ path('list_modify_post') }}">Modificar Post</a></li>
+                <li class="item-menu post-item-menu"><a href="{{ path('list_delete_post') }}">Eliminar Post</a></li>
+                <li class="item-menu categoria-item-menu"><a  href="{{ path('list_categories') }}">Listar Categorias</a></li>
+                <li class="item-menu categoria-item-menu"><a href="{{ path('add_category') }}">Añadir Categoria</a></li>
+                <li class="item-menu categoria-item-menu"><a href="{{ path('list_modify_category') }}">Modificar Categoria</a></li>
+                <li class="item-menu categoria-item-menu"><a href="{{ path('list_delete_category') }}">Eliminar Categoria</a></li>
+                <li class="item-menu mensaje-item-menu"><a href="{{ path('list_messages') }}">Listar Mensajes recibidos</a></li>
+                <li class="item-menu mensaje-item-menu"><a href="{{ path('list_delete_messages') }}">Eliminar Mensajes recibidos</a></li>
+                <li class="item-menu salir"><a href="/logout">Salir</a></li>
+            </ul>
         </div>
     </section>
 {% endblock %}

@@ -13,7 +13,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
     //Constante para indicar la cantidad de post que recuperaran por cada pagina
-    const limit = 2;
+    const limit = 6;
 
 
     //Metodo para obtener todos los post de una categoria

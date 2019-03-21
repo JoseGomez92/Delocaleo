@@ -101,12 +101,13 @@ class AdministradorController extends Controller
         //Se recupera el post
         $post = $this->getDoctrine()->getRepository('AppBundle:Post')->find($post_id);
         //Se carga la imagen (se indica un tipo file para el campo imagen
-        if($post->getImagen()){
-            $file = new \Symfony\Component\HttpFoundation\File\File('uploads/'.$post->getImagen());
-            $post->setImagen($file);
-        }
+        $fileName = 'uploads/'.$post->getImagen();
+        $file = new \Symfony\Component\HttpFoundation\File\File($fileName);
+        $post->setImagen($file);
+        echo $post->getImagen();
+
         //Se obtiene la instancia del formulario
-        $form = $this->createForm(PostType::class, $post, array());
+        $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
         if($form->isSubmitted()){

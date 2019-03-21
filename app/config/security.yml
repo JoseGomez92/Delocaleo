@@ -25,6 +25,10 @@ security:
         secured_area:
             pattern: ^/
             anonymous: ~
+            logout:
+                invalidate_session: true
+                path: /logout
+                target: /
             http_basic:
                 realm: "Secured Area"
 

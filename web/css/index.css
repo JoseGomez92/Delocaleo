@@ -363,8 +363,7 @@
 .nav-paginas{
 	width: auto;
 	height: 60px;
-	margin: auto;
-	margin-top: 20px;
+	margin: 20px auto 30px auto;
 	padding-left: 15px;
 	padding-right: 15px;
 	position: relative;

@@ -23,10 +23,10 @@
                             {% set palabras = post.descripcion|trim|split(' ') %}
                             {% for palabra in palabras %}
                                 {% if loop.index < 30 %}
-                                    {{ palabra }}
+                                    {{ palabra|raw }}
                                 {% endif %}
                             {% endfor %}
-                            ...<b>Leer mas</b>
+                            <b>Leer mas</b>
                         </p>
                     </a>
                 </article>

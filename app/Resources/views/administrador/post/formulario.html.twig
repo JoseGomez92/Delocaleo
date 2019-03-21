@@ -25,7 +25,6 @@
             {% endif %}
             <form class="formulario-anadir" method="post" enctype="multipart/form-data" action="{{ path('add_post') }}">
                 <div class="contenedor-formulario">
-                    <h2>Formulario para añadir posts</h2>
                     {{ form_row(form.categoria) }}
                     {{ form_row(form.titulo) }}
                     {{ form_row(form.slug) }}
@@ -33,13 +32,13 @@
                     {{ form_row(form.tags) }}
                     {{ form_row(form.descripcion) }}
                     <div>
-                        <span class="boton" id="cursiva">Cursiva</span>
-                        <span class="boton" id="negrita">Negrita</span>
-                        <span class="boton" id="imagen">Imagen</span>
-                        <span class="boton" id="tuit">Tuit</span>
-                        <span class="boton" id="video">Video</span>
-                        <span class="boton" id="enlace">Enlace</span>
-                        <span id="deshacer">Deshacer</span>
+                        <span class="boton-funcionalidad" id="cursiva">Cursiva</span>
+                        <span class="boton-funcionalidad" id="negrita">Negrita</span>
+                        <span class="boton-funcionalidad" id="imagen">Imagen</span>
+                        <span class="boton-funcionalidad" id="tuit">Tuit</span>
+                        <span class="boton-funcionalidad" id="video">Video</span>
+                        <span class="boton-funcionalidad" id="enlace">Enlace</span>
+                        <span class="boton-funcionalidad" id="deshacer">Deshacer</span>
                     </div>
                     {% if modificar is defined %}
                         <input type="submit" value="Modificar">

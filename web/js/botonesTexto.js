@@ -64,7 +64,7 @@ function iniciar(){
 	document.getElementById('deshacer').addEventListener('click', function(){
 		recuperarTexto('atras');
 	});
-	var botones = document.querySelectorAll('.boton');
+	var botones = document.querySelectorAll('.boton-funcionalidad');
 	for(var i = 0; i < botones.length; i++){
 		botones[i].addEventListener('click', function(){
 			insertaEtiqueta(this);
