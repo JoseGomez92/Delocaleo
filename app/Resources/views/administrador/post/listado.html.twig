@@ -28,7 +28,7 @@
                                 <img src="{{ asset('uploads')~'/'~post.imagen }}" alt="{{ post.imagen }}">
                             </figure>
                             <div class="tema-y-etiquetas">
-                                <p class="tematica">Curiosidades</p>
+                                <p class="tematica">{{ post.categoria.nombre }}</p>
                                 <div class="tags">
                                     {% for tag in post.tags|trim|split(' ') %}
                                         <span>#{{ tag }}</span>
