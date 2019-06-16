@@ -8,7 +8,8 @@
     {% include 'template/nav_pags.html.twig' %}
 {% endblock %}
 
-{% block extrajs %}
+{% block javascript %}
+    {{ parent() }} {# SE INCLUYEN LOS SCRIPTS JS DEL PADRE ADEMOS DE LOS DE LA PROPIA PLANTILLA #}
     <script type="text/javascript" src="{{ asset('js/eliminaEspaciosVerticalesArticulos.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/muestraOcultaNavPaginas.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/limitaPag.js') }}"></script>

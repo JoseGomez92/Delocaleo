@@ -18,7 +18,6 @@ class CategoriaController extends Controller
     {
         //Se obtiene la categoria
         $category = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findOneBy(array('nombre' => $categoryName));
-
         if($category != null){
             //Se obtienen todas las categorias de la BBDD
             $categories = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findAll();
@@ -51,7 +50,6 @@ class CategoriaController extends Controller
     {
         //Se obtiene la categoria
         $category = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findOneBy(array('nombre' => $categoryName));
-
         if($category != null){
             //Se obtienen todas las categorias de la BBDD
             $categories = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findAll();
@@ -84,9 +82,6 @@ class CategoriaController extends Controller
         $contacto = new Contacto();
         //Se obtiene la instancia del formulario
         $form = $this->createForm(ContactoType::class, $contacto, array());
-        //Se obtienen las categorias
-        $categorias = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findAll();
-
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $em = $this->getDoctrine()->getManager();
@@ -100,6 +95,8 @@ class CategoriaController extends Controller
                 '¡Mensaje Enviado! Contactaremos contigo a la mayor brevedad posible'
             );
         }
+        //Se obtienen las categorias
+        $categorias = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findAll();
 
         return $this->render('contacto/contacto.html.twig', array(
             'form' => $form->createView(),

@@ -90,15 +90,15 @@
 		font-size: 18px;
 	}
 
-	span{
-	/*	display: inline-block;
-		width: 100%;
-		margin-bottom: 20px;
-		padding: 5px 15px 5px 15px;
-		background-color: #13f0aa;*/
-	}
+/********************************************* ESTILOS GENERICOS *********************************************/
+.contenedor-notificacion p{
+	text-align: center;
+}
+
 
 /********************************************* ESTILOS ESPECIFICOS *********************************************/
+
+
 
 
 /*********************** MENU ***********************/

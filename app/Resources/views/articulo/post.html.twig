@@ -1,10 +1,10 @@
 {% extends 'layout.html.twig' %}
 
-
 {% block title %}{{ post.titulo }} - delocaleo.com{% endblock %}
 
 {% block extrasheets %}
     <link type="text/css" rel="stylesheet" href="{{ asset('css/post.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/registro.css') }}"
 {% endblock %}
 
 {% block content %}
@@ -48,14 +48,16 @@
                 </div>
             </article>
         </div>
+        {% include 'articulo/comentarios.html.twig' %}
+        {% include 'articulo/registro.html.twig' %}
     </section>
     {% include 'template/aside.html.twig' %}
     {% include 'articulo/nav_posts.html.twig' %}
 {% endblock %}
 
-{% block extrajs %}
+{% block javascript %}
+    {{ parent() }} {# SE INCLUYEN LOS SCRIPTS JS DEL PADRE ADEMOS DE LOS DE LA PROPIA PLANTILLA #}
     <script type="text/javascript" src="{{ asset('js/compartirPostRedes.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/eliminaEspaciosVerticalesArticulos.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/muestraOcultaNavPaginas.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/limitaPag.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/comentario.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/registro.js') }}"></script>
 {% endblock %}

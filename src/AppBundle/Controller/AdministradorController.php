@@ -28,7 +28,7 @@ class AdministradorController extends Controller
      */
     public function listPostAction(Request $request){
         //Se recuperan todos los posts
-        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findAll();
+        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findBy(array(), array('id' => 'DESC'));
         //Se renderiza la vista para visualizar todos los posts
         return $this->render('administrador/post/listado.html.twig', [
             'posts' => $posts,
@@ -46,7 +46,6 @@ class AdministradorController extends Controller
         $form = $this->createForm(PostType::class, $post, array());
         //Se obtienen las categorias
         $categorias = $this->getDoctrine()->getRepository('AppBundle:Categoria')->findAll();
-
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $em = $this->getDoctrine()->getManager();

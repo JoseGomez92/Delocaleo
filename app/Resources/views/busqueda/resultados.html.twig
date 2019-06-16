@@ -1,6 +1,5 @@
 {% extends 'layout.html.twig' %}
 
-
 {% block title %}Resultados de Busqueda - delocaleo.com{% endblock %}
 
 {% block extrasheets %}
@@ -12,6 +11,7 @@
     {% include 'template/aside.html.twig' %}
 {% endblock %}
 
-{% block extrajs %}
+{% block javascript %}
+    {{ parent() }} {# SE INCLUYEN LOS SCRIPTS JS DEL PADRE ADEMOS DE LOS DE LA PROPIA PLANTILLA #}
     <script type="text/javascript" src="{{ asset('js/muestraOcultaNavPaginas.js') }}"></script>
 {% endblock %}

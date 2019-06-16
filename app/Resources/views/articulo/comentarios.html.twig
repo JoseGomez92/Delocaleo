@@ -1,0 +1,88 @@
+{% block comentario %}
+    <div class='modal-login' id="modalLogin" style="display:none">{# MODAL PARA EL LOGIN DEL USUARIO #}
+        <div class="contenedor-formulario-login">
+            <div class="item-cerrar-modal" id="cerrarModalLogin">
+                <img src="{{ asset('img/icons/cerrar-black.png') }}" alt="icono-cerar.png" />
+            </div>
+            <div>
+                <h3>Acceso de usuario</h3>
+            </div>
+            <div id="contenedorMensajeLogin" class="contenedor-mensaje-login" style="display:none">
+                <p>Mensaje de Error</p>
+            </div>
+            <form action="#">
+                <div>
+                    <label for="user">Usuario</label>
+                    <input id="user" name="user" type="text" maxlength="255" required />
+                </div>
+                <div>
+                    <label for="pass">Contraseña</label>
+                    <input id="pass" name="pass" type="password" maxlength="255" required />
+                </div>
+                <div id="contener-check-clave">
+                    <label id="labelMostrarClave" for="mostrarClave">Mostrar contraseña</label>
+                    <input id="mostrarClave" type="checkbox" />
+                </div>
+            </form>
+            <div>
+                <button id="submitFormLogin">Login</button> {# SE UBICA EL BOTON FUERA PARA EVITAR QUE SE ENVIE EL FORMULARIO #}
+            </div>
+        </div>
+    </div>
+    <div class="contenedor-comentarios"> {# CONTIENE LOS COMENTARIOS Y BOTONES PARA QUE EL USUARIO SE LOGUEE O REGISTRE #}
+        {% if app.session.get('usuario') is not null %}{# VERIFICACIÓN PARA COMPROBAR SI EL USUARIO SE HA LOGUEADO #}
+            <div class="nuevo-comentario">
+                <div class="contenedor-imagen-usuario">
+                    <img src="{{ asset('uploads/' ~ app.session.get('usuario').imagen ) }}" alt="imagen-usuario" /> {# IMAGEN USER #}
+                </div>
+                <div class="contenedor-formulario">
+                    <form id="formComentario" method="post" action="{{ path('create_comment', { 'slug': post.slug }) }}">  {# FORM CON EL TEXTAREA #}
+                        <textarea id="comentarioText" name="texto_comentario" cols="30" rows="5" placeholder="Indique su opinión..."></textarea>
+                    </form>
+                </div> 
+                <div class="contenedor-botones-comentario"> {# BOTON DE PUBLICACION DEL COMENTARIO O LOGIN (SI EL USUARIO NO SE HA LOGUEADO) #}
+                    <button id="enviarFormComentario">PUBLICAR</button>
+                </div>
+            </div>
+        {% else %}
+            <div class="contenedor-login">
+                <h3>¿Quieres dejar tu opinión?</h3>
+                <div>
+                    <button id="loginButton">Login</button>
+                    <button id="registroButton">Registrarme</button>
+                </div>
+            </div>
+        {% endif %}
+        <div class="contenedor-cabecera-comentarios">
+            <h3>Comentarios</h3>
+        </div>
+        {% if comentarios|length > 0 %}
+            {% for comentario in comentarios %} {# SE MUESTRAN LOS COMENTARIOS DEL POST #}
+                <div id="{{ 'comentario-' ~ comentario.id }}" class="comentario">{# REPRESENTA CADA UNO DE LOS COMENTARIOS INDIVIDUALES#}
+                    <div class="cabecera-comentario"> {# IMAGEN, NOMBRE Y FECHA DE PUBLICACION DEL COMENTARIO #}
+                        <div class="datos-usuario">
+                            <div class="contenedor-imagen-usuario">
+                                <img src="{{ asset('uploads/' ~ comentario.usuario.imagen ) }}" alt="imagen-usuario" /> {# IMAGEN USER #}
+                            </div> 
+                            <div class="contenedor-nombre-usuario">
+                                <p><b>{{ comentario.usuario.nombre|capitalize }}</b></p> {# NOMBRE USER #}
+                            </div>
+                        </div>
+                        <div class="contenedor-fecha-comentario">
+                            <date>{{ comentario.fechaPublicacion|date('d-m-Y') }}</date>  {# FECHA DE PUBLICACION #}
+                        </div>
+                    </div>
+                    <div class="contenedor-comentario-usuario">
+                        <p> {# TEXTO DEL COMENTARIO #}
+                            {{ comentario.texto }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="contenedor-no-comentarios">
+                <p>Aún no hay comentarios. ¡Se el primero en dejar tu opinión!</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

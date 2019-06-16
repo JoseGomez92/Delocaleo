@@ -1,6 +1,6 @@
 //Script para mostrar u ocultar el menu de navegacion
 
-function mustraOcultaNavegacion(){
+function muestraOcultaNavegacion(){
 	
 	//Elemento menu
 	var menu = document.getElementById('navegacion');
@@ -18,4 +18,4 @@ function mustraOcultaNavegacion(){
 	});	
 }
 
-window.addEventListener('load', mustraOcultaNavegacion);
+window.addEventListener('load', muestraOcultaNavegacion);

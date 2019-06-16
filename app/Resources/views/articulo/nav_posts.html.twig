@@ -1,7 +1,7 @@
 <nav class="nav-posts">
     <div class="contenedor-nav-posts">
         {% if slugAnterior != null %}
-            <a href="{{ slugAnterior }}">
+            <a href="{{ path('view_post', {'slug' : slugAnterior}) }}">
                 <span class="anterior">
                     <img src="{{ asset('img/icons/flecha-anterior.png') }}" alt="pagina-anterior">
                 </span>
@@ -12,7 +12,7 @@
             <span class="separador">|</span>
         {% endif %}
         {% if slugPosterior != null %}
-            <a href="{{ slugPosterior }}">
+            <a href="{{  path('view_post', {'slug' : slugPosterior}) }}">
                 <p class="sig">Sig.</p>
                 <span class="siguiente">
                     <img src="{{ asset('img/icons/flecha-siguiente.png') }}" alt="pagina-siguiente">

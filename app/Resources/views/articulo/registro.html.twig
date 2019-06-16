@@ -1,0 +1,23 @@
+<div class="modal-registro" id="modalRegistro" style="display:none">
+    <div class="contenedor-formulario-registro">
+        <div class="item-cerrar-modal" id="cerrarModalRegistro">
+            <img src="{{ asset('img/icons/cerrar-black.png') }}" alt="icono-cerar.png" />
+        </div>
+        <div class="contenedor-mensaje-registro" id="contenedorMensajeRegistro" style="display:none">
+            <p>Mensaje para la operación</p>
+        </div>
+        <div class="contenedor-cabecera-modal">
+            <h2>Formulario Registro</h2>
+            <h3>¡Registrate! Así podrás aportar tu opinión y ayudar a la comunidad para que siga creciendo.</h3>
+        </div>
+        <div>
+            <form class="formulario-registro" id="formRegistro" method="post" enctype="multipart/form-data" action="{{ path('user_register') }}">
+                {{ form_row(formUsuario.nombre) }}
+                {{ form_row(formUsuario.email) }}
+                {{ form_row(formUsuario.password)}}
+                {{ form_row(formUsuario.imagen) }}
+            </form>
+            <button id="submitFormRegistro">Registro</button>
+        </div>
+    </div>
+</div>
