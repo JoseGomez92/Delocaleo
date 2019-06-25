@@ -27,7 +27,7 @@ class UsuarioController extends Controller
             $em = $this->getDoctrine()->getEntityManager();
             //Se busca el usuario en base a los credendiales recibidos
             $usuario = $em->getRepository('AppBundle:Usuario')->findOneBy(
-                array('email' => $user, 'password' => $pass)
+                array('nombre' => $user, 'password' => $pass)
             );
             //Se verifica que el usuario exista
             if(is_null($usuario)) throw new \Exception('Credenciales invalidos');
@@ -56,8 +56,11 @@ class UsuarioController extends Controller
         $password = $request->get('password');
         $img = $request->files->get('imgUsuario');
         try{
+            $em = $this->getDoctrine()->getEntityManager();
             //Se verifica si se ha recibido el formulario
             if(is_null($nombre) || is_null($email) || is_null($password) || is_null($img)) throw new \Exception('No se recibieron los parametros adecuados');
+            //Se verifica si ya existe un usuario con los credenciales (nombre y/o email) indicados
+            if(count($em->getRepository('AppBundle:Usuario')->findByNameOrEmail($nombre, $email)) > 0) throw new \Exception ('Ya existe un usuario con el mismo nombre y/o email');
             $em = $this->getDoctrine()->getManager();            
             //Se obtiene un nombre unico para la imagen
             $imgName = md5(uniqid()).'.'.$img->guessExtension();
